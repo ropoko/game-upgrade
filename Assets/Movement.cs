@@ -4,47 +4,47 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public CharacterController controller;
+	public CharacterController controller;
 
-    public float speed = 25f;
+	public float speed = 25f;
 
-    public Transform groundCheck;
-    public float groundDistance = 0.8f;
-    public LayerMask groundMask;
+	public Transform groundCheck;
+	public float groundDistance = 0.8f;
+	public LayerMask groundMask;
 
-    public float jumpHeight = 20f;
+	public float jumpHeight = 20f;
 
-    public float gravity = -8f; // earth 9.81
-    Vector3 velocity;
+	public float gravity = -8f; // earth 9.81
+	Vector3 velocity;
 
-    bool isGrounded;
+	bool isGrounded;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
 
-    // Update is called once per frame
-    void Update()
-    {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+	}
 
-        if (isGrounded && velocity.y < 0)
-            velocity.y = -2f;
+	// Update is called once per frame
+	void Update()
+	{
+		isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+		if (isGrounded && velocity.y < 0)
+			velocity.y = -2f;
 
-        Vector3 move = transform.right * x + transform.forward * z;
+		float x = Input.GetAxis("Horizontal");
+		float z = Input.GetAxis("Vertical");
 
-        controller.Move(move * speed * Time.deltaTime);
+		Vector3 move = transform.right * x + transform.forward * z;
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+		controller.Move(move * speed * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
+		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
-        controller.Move(velocity * Time.deltaTime);
-    }
+		velocity.y += gravity * Time.deltaTime;
+
+		controller.Move(velocity * Time.deltaTime);
+	}
 }
