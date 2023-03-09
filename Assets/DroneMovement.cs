@@ -17,7 +17,7 @@ public class DroneMovement : MonoBehaviour
 	void Update()
 	{
 		if (Vector3.Distance(transform.position, playerBody.transform.position) > 20f) {
-			transform.localPosition = Vector3.MoveTowards(transform.position, playerBody.transform.position, .5f);
+			transform.localPosition = Vector3.MoveTowards(transform.position, new Vector3(playerBody.transform.position.x, playerBody.transform.position.y + 10, playerBody.transform.position.z), .8f);
 		}
 	}
 }
